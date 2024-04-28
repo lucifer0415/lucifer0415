@@ -1,0 +1,37 @@
+sudo -i
+-----------------
+sudo apt-get update
+sudo apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+gnupg-agent \
+software-properties-common
+-------------------------
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+---------------
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+----------------
+systemctl status docker
+--------------------
+docker pull registry
+--------------------
+docker run -d -p 5000:5000 --name registry registry:latest
+--------------------
+docker pull centos
+--------------------
+docker images
+--------------------
+docker tag (centos ID) localhost:5000/centos
+--------------------
+docker push localhost:5000/centos
+--------------------
+docker rmi
+--------------------
+docker pull localhost:5000/centos
+--------------------
+docker ps
