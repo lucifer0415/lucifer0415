@@ -1,0 +1,70 @@
+launch 3 instances
+--------------------
+name one manager, another worker 1 and worker 2
+sudo -i
+-----------------
+sudo apt-get update
+sudo apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+gnupg-agent \
+software-properties-common
+-------------------------
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+---------------
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+----------------
+systemctl status docker
+--------------------
+(in manager instance)
+docker info
+docker swarm --help
+docker swarm init
+docker swarm init --advertise-addr ip_add
+*copy the key 
+--------------------
+docker services --help
+docker services create
+ping www.google.com -c 4
+docker services create alpine ping www.google.com
+docker services ls
+docker services ps service_id
+docker container ls
+docker node ls
+--------------------
+docker service ls
+docker service scale service_id=5
+docker service ps service_id
+docker service ls
+docker service ps service_id
+
+docker services rollback services_id
+docker container ls
+--------------------
+(in worker mode)
+docker swarm join-token worker/manager
+*paste the key of manager
+--------------------
+docker services create –replicas 5 alpine ping www.dypiu.ac.in
+docker service ls
+docker service ps service_id(5/5 service id)
+--------------------
+docker container ls
+--------------------
+docker node ls
+--------------------
+docker swarm leave
+--------------------
+docker node rm node_id 
+docker node demote leader_id
+docker node promote leader_id 
+docker swarm join-token manager
+--------------------
+docker node ls
+
+
